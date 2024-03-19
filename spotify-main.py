@@ -1,12 +1,8 @@
-#imports
-
 import os
-import json
 import spotipy
 import pandas
 import spotipy.util as util
 from json.decoder import JSONDecodeError
-import requests
 #from config import username
 #from config import client_id
 #from config import client_secret
@@ -30,30 +26,39 @@ user = sp.current_user()
 name = user['display_name'].split(' ')
 print('%s spotify account' %(str(name[0])))
 
-#Practice by retrieving all of the Talking Heads albums
-talking_heads = '2x9SpqnPi8rlE9pjHBwmSC'
-anri_uri = 'spotify:artist:0xGtOrmB2hnrNRLG3vhpSo'
+def search_playlist(result, query): # returns the playlist id from the result of the search method
+    if(str.lower(result['playlists']['items'][0]['name']) == str.lower(query) and
+       result['playlists']['items'][0]['owner']['id'] == 'spotify'):
+        playlist_id = result['playlists']['items'][0]['id']
+        return playlist_id
+    else:
+        print('No playlist found for: ' + query)
+        return None
 
-#Retrieve the talking heads artist id, anri artist id
-#Anri - https://open.spotify.com/artist/0xGtOrmB2hnrNRLG3vhpSo?si=AqFjbL0fSGuahy7mZNQVww
-#Talking Heads - https://open.spotify.com/artist/2x9SpqnPi8rlE9pjHBwmSC?si=4I0U_j3sRmqmJ3FnugreZQ
+#Create a list of countries
+countries = ['France', 'Italy', 'Taiwan', 'Jamaica', 'Japan', 'USA', 'Mexico', 'Brazil', 'India', 
+             'Australia', 'Nigeria', 'South Korea', 'Germany', 'UK', 'Spain', 'Colombia', 'Argentina',
+             'Philippines', 'Dominican Republic', 'Guatemala', 'Chile', 'Puerto Rico', 'Peru', 'Turkey',
+             'Greece', 'Vietnam', 'Sweden', 'Honduras', 'Costa Rica', 'Ecuador', 'Hong Kong', 'Netherlands',
+             'El Salvador', 'Canada', 'Portugal', 'Venezuela', 'Ukraine', 'Paraguay', 'Bolivia', 'South Africa']
+playlist_name = 'Top 50 - ' # + country
 
-results = sp.artist_albums(anri_uri, album_type='album')
-anris_albums = results['items']
-
-while results['next']: #Stole this from stack overflow, but it's also in the spotipy get started page
-    results = sp.next(results)
-    anris_albums.extend(results['items'])
-
-print('-- Anris Spotify Album Data --')
-for album in anris_albums:
-    print('-~-~-')
-    print('Album Name: ' + album['name'])
-    print('Album ID: ' + album['id'])
-    print('Album Release Year: ' + album['release_date'])
-    print('Number of tracks: ' + str(album['total_tracks']))
-print('END OF LIST')
-
-sp.artist(anri_uri)
-timely = sp.album('spotify:album:2X9EFWmSWAYLjKm9y6llqL') # https://open.spotify.com/album/2X9EFWmSWAYLjKm9y6llqL?si=YXWQpU8LQRSVg4hCcsnj6Q
-#print(timely)
+#Pull the 'Top 50 - <country name>' playlists for the countries in the list
+for country in countries:
+    search_result = sp.search(playlist_name + country, type='playlist', limit=1)
+    playlist_id = search_playlist(search_result, playlist_name + country)
+    if playlist_id is not None:
+        playlist_tracks = sp.playlist_tracks(playlist_id, additional_types=('track'))
+        track_ids = []
+        track_names = []
+        for track_obj in playlist_tracks['items']:
+            #Get the track ids from the playlist and put it in a list      
+            #Use the ids to search songs and their features/analysis and then put that data in csv files by country
+            track_ids.append(track_obj['track']['id'])
+            track_names.append(track_obj['track']['name'])
+        #export dataframe to csv before the first for loop moves to next country
+        track_information_df = pandas.DataFrame(sp.audio_features(track_ids))
+        track_information_df.insert(0, 'name', track_names, False)
+        #track_information_df.drop(['track_href', 'analysis_url'], axis=1) How do I do this?
+        track_information_df.to_csv('resources/' + country + '.csv', sep=',', index=False, encoding='utf-8')
+        print(f'Finished converting {country}\'s Top 50 Playlist to csv')
