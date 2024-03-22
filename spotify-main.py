@@ -37,7 +37,7 @@ def search_playlist(result, query): # returns the playlist id from the result of
 
 #Create a list of countries
 countries = ['France', 'Italy', 'Taiwan', 'Jamaica', 'Japan', 'USA', 'Mexico', 'Brazil', 'India', 
-             'Australia', 'Nigeria', 'South Korea', 'Germany', 'UK', 'Spain', 'Colombia', 'Argentina',
+             'Australia', 'Nigeria', 'South Korea', 'Germany', 'United Kingdom', 'Spain', 'Colombia', 'Argentina',
              'Philippines', 'Dominican Republic', 'Guatemala', 'Chile', 'Puerto Rico', 'Peru', 'Turkey',
              'Greece', 'Vietnam', 'Sweden', 'Honduras', 'Costa Rica', 'Ecuador', 'Hong Kong', 'Netherlands',
              'El Salvador', 'Canada', 'Portugal', 'Venezuela', 'Ukraine', 'Paraguay', 'Bolivia', 'South Africa']
