@@ -1,4 +1,4 @@
-SPOTIFY ANALYSIS
+
 ![image](https://github.com/meddling-moose/team10-spotify-project/assets/157430192/bdd3a332-a4d6-4ba3-948a-733deed7a618)
 # About the Project
 Spotify (/ˈspɒtɪfaɪ/; Swedish: [ˈspɔ̂tːɪfaj]) is a Swedish[6] audio streaming and media service provider founded on 23 April 2006.[7] It is one of the largest music streaming service providers, with over 602 million monthly active users, including 236 million paying subscribers, as of December 2023.
