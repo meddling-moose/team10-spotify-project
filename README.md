@@ -3,17 +3,17 @@
 # About the Project
 Spotify (/ˈspɒtɪfaɪ/; Swedish: [ˈspɔ̂tːɪfaj]) is a Swedish[6] audio streaming and media service provider founded on 23 April 2006.[7] It is one of the largest music streaming service providers, with over 602 million monthly active users, including 236 million paying subscribers, as of December 2023.
 Spotify is available in most of Europe, as well as Africa, the Americas, Asia, and Oceania, with a total availability in 184 markets.[9] Its users and subscribers are based largely in the US and Europe, jointly accounting for around 53% of users and 67% of revenue.[10] It has no presence in mainland China where the market is dominated by QQ Music. 
-Spotipy is a lightweight Python library for the Spotify Web API. With Spotipy you get full access to all of the music data provided by the Spotify platform
+Spotipy is a lightweight Python library for the Spotify Web API. With Spotipy you get full access to all of the music data provided by the Spotify platform. Full Spotipy / Spotify Web API (Spotify offers multiple APIs, for our project we used the Web API) documentation available here: https://developer.spotify.com/documentation/web-api
 •	Here, we have explored and examined musical attributes globally
 •	Conducted data cleaning to perform exploratory data analysis (EDA) and data visualization of the Spotify dataset using Python (Pandas, NumPy, Matplotlib, Scipy.stats).
 •	Data analysis - Analyzed attributes like “danceability” and “energy”.  We could not analyze song, artist popularity by country, genre, etc. (i.e. our original goal)
 # Technical challenges:
 1. API often did not provide the data in the format, or in its content, to support our analyses (i.e. forced to focus on aggregated music attributes, rather      than their popularity by country and artist as we desired.
-2. Spotify token process to access API 
+2. Spotify token process to access API (different, more indirect process than web api calls for NYT or OpenWeather taught in class) required learning and implementing a new api call process using tokens
 3. Installing Spotipy library in order to access Spotify API 
 4. Modifying Mac/Win shell to store Spotify credentials to anonymize code (not taught)
 # The Approach:
-1. We set up spotipy wrapper library with client id and client secret credentials.
+1. We set up Spotipy wrapper library with client id and client secret credentials.
 2. Setup Spotipy account with token access
 3. Created client id and client secret and retrieved the access token
 4. Combined CSVs and calculate averages for audio features by country
