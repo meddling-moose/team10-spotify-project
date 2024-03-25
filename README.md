@@ -14,13 +14,13 @@ Spotipy is a lightweight Python library for the Spotify Web API. With Spotipy yo
 4. Modifying Mac/Win shell to store Spotify credentials to anonymize code (not taught)
 # The Approach:
 1. We set up spotipy wrapper library with client id and client secret credentials.
-2. Setup Stopipy account with token access
-3. Created client id and client secret and retrived the access token
+2. Setup Spotipy account with token access
+3. Created client id and client secret and retrieved the access token
 4. Combined CSVs and calculate averages for audio features by country
 5. DATA CLEAN UP
-Merged country data files into one combined dataframe "df_combined" for analysis
+Combined country data files into one combined dataframe "df_combined" for analysis
 - Use the Argentina.csv playlist as a sample to create a list of columns that are numerical (floats or ints) since statistical anaylsis can only be done on numerical data. This list of columns is then used to both calculate  averages and then to be listed as the keys of the master dataframe that will combine the averages of every column for every country.
-- Iterated through every CSV created in the prior cell to calcualte the average of each column (i.e. audio feature) for each CSV then add it to a master dictionary of all the averages that will later be converted into a dataframe.
+- Iterated through every CSV created in the prior cell to calculate the average of each column (i.e. audio feature) for each CSV then add it to a master dictionary of all the averages that will later be converted into a dataframe.
 - Used the os.listdir() method to get the list of all files in the resources directory
 - Removed file extension to use the name as the country for the dataframe at the end
 - Concatenated the name of the file with the name of the folder it is inside of (e.g. 'resources/Argentina.csv')
@@ -46,8 +46,7 @@ Merged country data files into one combined dataframe "df_combined" for analysis
 - Calculate correlation coeeficient using Pearson's R correlation method
 13. Completed Regional Analysis
 - Grouped data by countries by continent. We were hoping to learn whether different regions in the world had preferences by way of key features like: danceability, loudness, speechiness, valence, and duration
-- Iterate through to create a dataframe by region for audio features - eastern_european, western_european, northern_european, african, east_asian, southeast_asian, south_asian,
-  middle_eastern, latin_american, english_speaking 
+- Iterate through to create a dataframe by region for audio features - eastern_european, western_european, northern_european, african, east_asian, southeast_asian, south_asian, middle_eastern, latin_american, english_speaking 
 - Visualized the world regional averages for each of the audio feature respectively
 14. Displayed Top 50 playlist by country (Referred to I am sumat code)
 - Def search_playlist(result, query) to return the playlist id from the result of the search method 
